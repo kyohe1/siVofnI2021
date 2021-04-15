@@ -6,13 +6,13 @@
 ## W02
 
 ### task1
-https://kyohe1.github.io/siVofnI2021/W02/vec3.js
+<a href="https://kyohe1.github.io/siVofnI2021/W02/vec3.js">https://kyohe1.github.io/siVofnI2021/W02/vec3.js<a>
 
 ### task2
-https://kyohe1.github.io/siVofnI2021/W02/task2.html
+<a href="https://kyohe1.github.io/siVofnI2021/W02/task2.html">https://kyohe1.github.io/siVofnI2021/W02/task2.html<a>
 
 ### task3
-https://kyohe1.github.io/siVofnI2021/W02/task3.html
+<a href="https://kyohe1.github.io/siVofnI2021/W02/task3.html">https://kyohe1.github.io/siVofnI2021/W02/task3.html<a>
 
 
 ## W03
