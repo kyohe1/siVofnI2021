@@ -58,7 +58,7 @@ class Vec3 {
         return maximum;
         /*  The case of using ternary operators.
                 const m = this.x > this.y ? this.x : this.y;
-                return m > this.z ? this.z : m;
+                return m > this.z ? m : this.z;
         *   The case of using the Math module.
                 return Math.max( this.x, this.y, this.z );
         */
