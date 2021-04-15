@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Task3</title>
+    </head>
+    <body>
+        <form name="frm">
+            Vertex1:
+            x0: <input type="text" name="txtx0" value=0>
+            y0: <input type="text" name="txty0" value=0>
+            z0: <input type="text" name="txtz0" value=0>
+            <br>
+            Vertex2:
+            x1: <input type="text" name="txtx1" value=0>
+            y1: <input type="text" name="txty1" value=0>
+            z1: <input type="text" name="txtz1" value=0>
+            <br>
+            Vertex3:
+            x2: <input type="text" name="txtx2" value=0>
+            y2: <input type="text" name="txty2" value=0>
+            z2: <input type="text" name="txtz2" value=0>
+        </form>
+        <input type="button" value="Calculate" id="calc"/>
+
+        <script src="vec3.js"></script>
+        <script>
+            document.getElementById('calc').onclick = function() {
+                var x0 = document.frm.txtx0.value;
+                var y0 = document.frm.txty0.value;
+                var z0 = document.frm.txtz0.value;
+                var v0 = new Vec3( x0, y0, z0 );
+
+                var x1 = document.frm.txtx1.value;
+                var y1 = document.frm.txty1.value;
+                var z1 = document.frm.txtz1.value;
+                var v1 = new Vec3( x1, y1, z1 );
+
+                var x2 = document.frm.txtx2.value;
+                var y2 = document.frm.txty2.value;
+                var z2 = document.frm.txtz2.value;
+                var v2 = new Vec3( x2, y2, z2 );
+
+                var S = Vec3.AreaOfTriangle( v0, v1, v2 ); // (output value)
+                window.alert("Result:S = " + S);
+            }
+        </script>
+    </body>
+</html>
