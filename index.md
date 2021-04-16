@@ -1,37 +1,28 @@
-## Welcome to GitHub Pages
+#Source Files
 
-You can use the [editor on GitHub](https://github.com/kyohe1/siVofnI2021/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+##W02
+###task1
+https://kyohe1.github.io/siVofnI2021/W02/vec3.js
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+###task2
+https://kyohe1.github.io/siVofnI2021/W02/task2.html
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+###task3
+https://kyohe1.github.io/siVofnI2021/W02/task3.html
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+##W03
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
+##W04
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+##W05
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kyohe1/siVofnI2021/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+##Note
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Do not copy and submit my files.
