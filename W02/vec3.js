@@ -74,9 +74,9 @@ class Vec3 {
 
     // Calculate the area of triangle(static method).
     static AreaOfTriangle(v0, v1, v2) {
-        var len01 = Vec3.edgeLength(v0, v1);
-        var len02 = Vec3.edgeLength(v0, v2);
-        var len12 = Vec3.edgeLength(v1, v2);
+        var len01 = this.edgeLength(v0, v1);
+        var len02 = this.edgeLength(v0, v2);
+        var len12 = this.edgeLength(v1, v2);
         var S = (len01 + len02 + len12) / 2;
 
         // Heron's formula
