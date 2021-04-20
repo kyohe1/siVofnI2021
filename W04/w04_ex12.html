@@ -10,16 +10,17 @@
 		var data = [
 			{ width: 100, color: 'red' },
 			{ width: 50, color: 'green' },
-			{ width: 80, color: 'blue' }];
+			{ width: 80, color: 'blue' }
+		];
 		var padding = 10;
 		var height = 20;
 		var svg = d3.select("body").append("svg");
 		svg.selectAll("rect").data(data).enter().append("rect")
 			.attr("x", padding)
-			.attr("y", d,i => {padding + i * (height + padding)})
+			.attr("y", (d,i) => padding + i * (height + padding))
 			.attr("width", d => d.width)
 			.attr("height", height)
-			.style("fill", d => d.width);
+			.style("fill", d => d.color);
 	</script>
 </body>
 

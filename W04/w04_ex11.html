@@ -13,7 +13,7 @@
 		var svg = d3.select("body").append("svg");
 		svg.selectAll("rect").data(data).enter().append("rect")
 			.attr("x", padding)
-			.attr("y", i => {padding + i * (height + padding)})
+			.attr("y", (d,i) => padding + i * (height + padding))
 			.attr("width", d => d)
 			.attr("height", height);
 	</script>
