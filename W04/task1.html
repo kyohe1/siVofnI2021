@@ -8,26 +8,16 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
         var svg = d3.select("body").append("svg");
-        var csv = "https://kyohe1.github.io/siVofnI2021/W04/w04_task2.csv";
-        var padding = 20;
-
+        var csv = "https://kyohe1.github.io/siVofnI2021/W04/w04_task1.csv";
         d3.csv(csv, function (data) {
-            svg.selectAll("rect")
+            svg.selectAll("circle")
                 .data(data)
                 .enter()
-                .append("rect")
-                .attr("x", padding)
-                .attr("y", (d, i) => padding + i * (d.h + padding))
-                .attr("width", d => d)
-                .attr("height", d => d.h)
-                .style("fill", "black")
-                .append("text")
-                .attr("x", padding - 10)
-                .attr("y", svg.attr("y"))
-                .text((d, i) => d.l)
-                .attr("fill", "black")
-                .attr("font-size", "12px")
-                .attr('text-anchor', "middle");
+                .append("circle")
+				.attr("cx", d => d.x)
+				.attr("cy", d => d.y)
+				.attr("r", d => d.r)
+                .style("fill",d => d.c)
         });
     </script>
 </body>
