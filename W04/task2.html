@@ -1,40 +1,38 @@
 <html>
 
 <head>
-    <title>W04: Task 01</title>
+    <title>W04: Task 02</title>
 </head>
 
 <body>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
-        var svg = d3.select("body").append("svg");
-        var csv = "https://kyohe1.github.io/siVofnI2021/W04/w04_task2.csv";
-        var padding = 20;
-
-
+        var svg = d3.select("body").append("svg").attr("width", 2000).attr("height", 1000);
+        var csv = "https://kyohe1.github.io/siVofnI2021/W04/prefectures.csv";
+        var padding = 90;
+        var height = 20;
         d3.csv(csv, function (data) {
-            var nest = d3.nest()
-                    .key(d => d.year).sortKeys(d3.ascending)
-                    .key(d => d.month).sortKeys(d3.ascending)
-                    .key(d => d.date).sortKeys(d3.ascending)
-                    .entries(data);
-            data = data.slice(0, 15);
-            svg.selectAll("rect")
-                .data(data)
-                .enter()
-                .append("rect")
+            var extData = data.filter(d => d.year == "2021" && d.month == "4" && d.date == "18")
+                            .sort((a,b) => -a.testedPositive - -b.testedPositive);
+
+            svg.append("g").selectAll("rect").data(extData).enter().append("rect")
                 .attr("x", padding)
-                .attr("y", (d, i) => padding + i * (d.h + padding))
-                .attr("width", d => d)
-                .attr("height", d => d.h)
-                .style("fill", "black")
+                .attr("dx", "50px")
+                .attr("y", (d, i) => i * (height + padding / 8))
+                .attr("width", d => d.testedPositive / 100)
+                .attr("height", d => height)
+                .style("fill", "red")
+
+            svg.append("g").selectAll("rect").data(extData).enter()
                 .append("text")
-                .attr("x", padding - 10)
-                .attr("y", svg.attr("y"))
+                .attr("x", padding / 4)
+                .attr("dx", "-10px")
+                .attr("y", (d, i) => i * (height + padding / 8))
+                .attr("dy", "15px")
                 .text(d => d.prefectureNameE)
                 .attr("fill", "black")
                 .attr("font-size", "12px")
-                .attr('text-anchor', "middle");
+                .attr('text-anchor', "left");
         });
     </script>
 </body>
