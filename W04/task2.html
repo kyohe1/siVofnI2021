@@ -6,35 +6,42 @@
 
 <body>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <h1>Number of PCR positive cases by prefecture (04/18/2021)</h1>
+    <g></g>
     <script>
-        var svg = d3.select("body").append("svg").attr("width", 2000).attr("height", 1000);
+        var width = 2000, height = 1500;
+        var svg = d3.select("body").append("svg").attr("width", 2000).attr("height", 1500);
         var csv = "https://kyohe1.github.io/siVofnI2021/W04/prefectures.csv";
-        var padding = 90;
-        var height = 20;
+
         d3.csv(csv, function (data) {
+            var padding = 90, dheight = 20;
+            var tgtValName = "testedPositive";
             var extData = data.filter(d => d.year == "2021" && d.month == "4" && d.date == "18")
-                            .sort((a,b) => -a.testedPositive - -b.testedPositive);
+                .sort((a, b) => -a.testedPositive - -b.testedPositive); // sort descending
 
             svg.append("g").selectAll("rect").data(extData).enter().append("rect")
                 .attr("x", padding)
                 .attr("dx", "50px")
-                .attr("y", (d, i) => i * (height + padding / 8))
+                .attr("y", (d, i) => i * (dheight + padding / 8))
                 .attr("width", d => d.testedPositive / 100)
-                .attr("height", d => height)
-                .style("fill", "red")
+                .attr("height", d => dheight)
+                .attr("fill", d => d3.interpolate("orange", "red")(d.testedPositive / extData[0][tgtValName]));
 
             svg.append("g").selectAll("rect").data(extData).enter()
                 .append("text")
+                .text(d => d.prefectureNameE)
                 .attr("x", padding / 4)
                 .attr("dx", "-10px")
-                .attr("y", (d, i) => i * (height + padding / 8))
+                .attr("y", (d, i) => i * (dheight + padding / 8))
                 .attr("dy", "15px")
-                .text(d => d.prefectureNameE)
                 .attr("fill", "black")
                 .attr("font-size", "12px")
                 .attr('text-anchor', "left");
         });
     </script>
+    Referenced from
+
+    <a href="https://toyokeizai.net/sp/visual/tko/covid19/en.html"> "Coronavirus Disease (COVID-19) Situation Report in Japan"</a> by Toyo Keizai Online covid-19 Task Team.
 </body>
 
 </html>
