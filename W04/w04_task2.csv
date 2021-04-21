@@ -1,7 +1,7 @@
-x,y,r,c
-20,20,10,red
-100,50,20,green
-70,80,5,blue
-300,100,25,yellow
-200,40,15,orange
-400,40,3,black
+pref,x,y,w,h
+,20,20,10,red
+,100,50,20,green
+,70,80,5,blue
+,300,100,25,yellow
+,200,40,15,orange
+,400,40,3,black
