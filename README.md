@@ -27,8 +27,32 @@ None
 ### task2
 <a href="https://kyohe1.github.io/siVofnI2021/W04/task2.html">https://kyohe1.github.io/siVofnI2021/W04/task2.html<a>
   
-
+  
 ## W05
+
+
+## W06
+
+
+## W07
+
+
+## W08
+
+
+## W09
+
+
+## W09
+
+
+## W10
+
+
+## W11
+
+
+## W12
 
 
 # Note
