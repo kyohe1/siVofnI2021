@@ -11,7 +11,7 @@
 
 <body>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <h1>Number of PCR positive cases by prefecture (04/18/2021)</h1>
+    <h1>Cumulative number of PCR positive cases by prefecture (2/05/2020~4/18/2021)</h1>
     <g></g>
     <script>
         var width = 2000, height = 1500;
@@ -20,11 +20,11 @@
 
         d3.csv(csv, function (data) {
             var padding = 90, dheight = 20;
-            var tgtValName = "testedPositive";
+            var tgtValName = "testedPositive"; // the label of target values in csv
             var extData = data.filter(d => d.year == "2021" && d.month == "4" && d.date == "18")
-                .sort((a, b) => -a.testedPositive - -b.testedPositive); // sort descending
+                .sort((a, b) => -a.testedPositive - -b.testedPositive); // Sort descending
 
-            svg.append("g").selectAll("rect").data(extData).enter().append("rect")
+            svg.append("g").selectAll("rect").data(extData).enter().append("rect") // draw the rectangle (using interpolated colormap)
                 .attr("x", padding)
                 .attr("dx", "50px")
                 .attr("y", (d, i) => i * (dheight + padding / 8))
@@ -32,7 +32,19 @@
                 .attr("height", d => dheight)
                 .attr("fill", d => d3.interpolate("orange", "red")(d.testedPositive / extData[0][tgtValName]));
 
-            svg.append("g").selectAll("rect").data(extData).enter()
+            svg.append("g").selectAll("rect").data(extData).enter() // draw the number of testedPositive
+                .append("text")
+                .text(d => d.testedPositive)
+                .attr("x", d => padding + d.testedPositive / 100)
+                .attr("dx", "5px")
+                .attr("y", (d, i) => i * (dheight + padding / 8))
+                .attr("dy", "15px")
+                .attr("fill", "black")
+                .attr("font-size", "12px")
+                .attr('text-anchor', "left");
+
+
+            svg.append("g").selectAll("rect").data(extData).enter() // draw the label (prefecture)
                 .append("text")
                 .text(d => d.prefectureNameE)
                 .attr("x", padding / 4)
@@ -46,7 +58,7 @@
     </script>
     Referenced from
     <a href="https://toyokeizai.net/sp/visual/tko/covid19/en.html"> "Coronavirus Disease (COVID-19) Situation Report in
-        Japan"</a> by Toyo Keizai Online covid-19 Task Team.
+        Japan"</a> by Toyo Keizai Online covid-19 Task Team (4/20/2021 Accessed).
 </body>
 
 </html>
