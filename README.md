@@ -30,10 +30,15 @@ None
   
 ## W05
 
+None
 
 ## W06
 
+### task1
+<a href="https://kyohe1.github.io/siVofnI2021/W06/task1.html">https://kyohe1.github.io/siVofnI2021/W06/task1.html<a>
 
+### task2
+<a href="https://kyohe1.github.io/siVofnI2021/W06/task2.html">https://kyohe1.github.io/siVofnI2021/W06/task2.html<a>
 ## W07
 
 
