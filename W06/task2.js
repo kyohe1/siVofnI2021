@@ -1,4 +1,4 @@
-d3.csv("https://kyohe1.github.io/siVofnI021/W04/data.csv")
+d3.csv("https://kyohe1.github.io/siVofnI2021/W06/data.csv")
     .then( data => {
         data.forEach( d => { d.x = +d.x; d.y = +d.y; });
 
