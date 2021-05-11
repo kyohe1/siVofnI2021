@@ -39,12 +39,23 @@ None
 
 ### task2
 <a href="https://kyohe1.github.io/siVofnI2021/W06/task2.html">https://kyohe1.github.io/siVofnI2021/W06/task2.html<a>
+  
+  
 ## W07
 
+None
 
 ## W08
 
+### task1
+<a href="https://kyohe1.github.io/siVofnI2021/W08/task1.html">https://kyohe1.github.io/siVofnI2021/W08/task1.html<a>
 
+### task2
+<a href="https://kyohe1.github.io/siVofnI2021/W08/task2.html">https://kyohe1.github.io/siVofnI2021/W08/task2.html<a>
+
+### task3
+<a href="https://kyohe1.github.io/siVofnI2021/W08/task3.html">https://kyohe1.github.io/siVofnI2021/W08/task3.html<a>
+  
 ## W09
 
 
@@ -63,4 +74,3 @@ None
 # Note
 
 Do not copy and submit my source files.
-
