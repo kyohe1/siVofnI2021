@@ -85,7 +85,8 @@ class BarChart{
             .attr("y", d => self.yscale(d.prefectureNameE))
             .attr("width", d => self.xscale(d.testedPositive/10))
             .attr("height", self.yscale.bandwidth())
-            .attr("fill", d => d3.interpolate("orange", "red")(d.testedPositive / self.data[0][self.config.tgtValName]));
+            .attr("fill", d => d3.interpolate("orange", "red")(d.testedPositive / self.data[0][self.config.tgtValName]))
+            .append("text");
 
         self.xaxis_group
             .call( self.xaxis )
@@ -107,5 +108,6 @@ class BarChart{
             .attr("transform", "rotate(-90)")
             .attr("font-size", "10pt")
             .text("Prefectures");
+
     }
 }
