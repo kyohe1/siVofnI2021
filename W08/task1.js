@@ -53,6 +53,7 @@ class BarChart{
             .paddingInner(0.1);
 
         self.xaxis = d3.axisBottom( self.xscale )
+            .ticks(25)
             .tickSizeOuter(0);
 
         self.xaxis_group = self.chart.append('g')
@@ -68,7 +69,7 @@ class BarChart{
     update(){
         let self = this;
 
-        self.xscale.domain([0, d3.max(self.data, d => d.testedPositive/10 + 100)]);
+        self.xscale.domain([0, d3.max(self.data, d => parseInt(d.testedPositive) + 2000)]);
         self.yscale.domain(self.data.map(d => d.prefectureNameE) );
 
         self.render();
@@ -83,11 +84,9 @@ class BarChart{
             .append("rect")
             .attr("x", 0)
             .attr("y", d => self.yscale(d.prefectureNameE))
-            .attr("width", d => self.xscale(d.testedPositive/10))
+            .attr("width", d => self.xscale(parseInt(d.testedPositive)))
             .attr("height", self.yscale.bandwidth())
-            .attr("fill", d => d3.interpolate("orange", "red")(d.testedPositive / self.data[0][self.config.tgtValName]))
-            .append("text");
-
+            .attr("fill", d => d3.interpolate("orange", "red")(parseInt(d.testedPositive) / self.data[0][self.config.tgtValName]));
         self.xaxis_group
             .call( self.xaxis )
             .append("text")
