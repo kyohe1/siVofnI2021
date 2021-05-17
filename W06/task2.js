@@ -62,7 +62,6 @@ class ScatterPlot {
             .tickSize(5)
             .tickPadding(1);    
 
-
         self.yaxis_group = self.chart.append('g')
             .attr('transform', `translate(0, 0)`);
     }

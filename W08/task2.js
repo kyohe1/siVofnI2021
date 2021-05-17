@@ -1,12 +1,13 @@
 
 d3.csv("https://kyohe1.github.io/siVofnI2021/W08/data.csv")
     .then(data => {
-
+        data.forEach( d => { d.x = +d.x; d.y = +d.y; });
+        
         var config = {
             parent: '#drawing_region',
-            width: 256,
-            height: 128,
-            margin: { top: 30, right: 10, bottom: 40, left: 100 }
+            width: 1200,
+            height: 800,
+            margin: { top: 30, right: 10, bottom: 40, left: 50 }
         };
 
         const lineChart = new LineChart(config, data);
@@ -21,10 +22,10 @@ class LineChart {
     constructor(config, data) {
         this.config = {
             parent: config.parent,
-            width: config.width || 2000,
-            height: config.height || 1500,
-            margin: config.margin || { top: 10, right: 10, bottom: 10, left: 30 },
-            tgtValName: "testedPositive"
+            width: config.width || 1200,
+            height: config.height || 800,
+            margin: config.margin || { top: 10, right: 10, bottom: 10, left: 50 },
+            axis_margin: 20
         }
         this.data = data;
         this.init();
@@ -38,41 +39,49 @@ class LineChart {
             .attr('height', self.config.height);
 
         self.chart = self.svg.append('g')
-            .attr('transform', `translate(${self.config.margin.left}, ${self.config.margin.top})`);
+          .attr('transform', `translate(${self.config.margin.left}, ${self.config.margin.top})`);
 
         self.inner_width = self.config.width - self.config.margin.left - self.config.margin.right;
         self.inner_height = self.config.height - self.config.margin.top - self.config.margin.bottom;
 
-        self.area = d3.area()
-            .x( d => d.x )
-            .y1( d => d.y )
-            .y0( 0 );
-            
         self.xscale = d3.scaleLinear()
             .range([0, self.inner_width]);
 
-        self.yscale = d3.scaleBand()
-            .range([0, self.inner_height])
-            .paddingInner(0.1);
+        self.yscale = d3.scaleLinear()
+            .range([0, self.inner_height]);
+
+        self.area = d3.area()
+            .x( d => self.xscale(d.x))
+            .y1( d => self.yscale(d.y))
+            .y0( self.yscale(d3.max(self.data, d => d.y)) + 10 );
 
         self.xaxis = d3.axisBottom(self.xscale)
-            .tickSizeOuter(0);
+            .ticks(12)
+            .tickSize(5)
+            .tickPadding(1);    
 
         self.xaxis_group = self.chart.append('g')
             .attr('transform', `translate(0, ${self.inner_height})`);
 
         self.yaxis = d3.axisLeft(self.yscale)
-            .tickSizeOuter(0);
-
-        self.yaxis_group = self.chart.append('g');
+            .ticks(12)
+            .tickSize(5)
+            .tickPadding(1);    
+        self.yaxis_group = self.chart.append('g')
+            .attr('transform', `translate(0, 0)`);
 
     }
 
     update() {
         let self = this;
 
-        self.xscale.domain([0, d3.max(self.data, d => d.testedPositive / 10 + 100)]);
-        self.yscale.domain(self.data.map(d => d.prefectureNameE));
+        const xmin = d3.min( self.data, d => d.x );
+        const xmax = d3.max( self.data, d => d.x );
+        self.xscale.domain( [xmin-self.config.axis_margin, xmax+self.config.axis_margin] );
+
+        const ymin = d3.min( self.data, d => d.y );
+        const ymax = d3.max( self.data, d => d.y );
+        self.yscale.domain( [ymax+self.config.axis_margin, ymin-self.config.axis_margin] );
 
         self.render();
     }
@@ -80,21 +89,22 @@ class LineChart {
     render() {
         let self = this;
 
+        self.chart.selectAll("circle")
+            .data(self.data)
+            .enter()
+            .append("circle")
+            .attr("cx", d => self.xscale( d.x ) )
+            .attr("cy", d => self.yscale( d.y ) )
+            .attr("r", d => d.r );
+/*/
         self.chart.selectAll("path")
             .data(self.data)
             .enter()
-            .append("rect")
-            .attr('d', area(data))
-            .attr('stroke', 'black')
-            .attr('fill', 'black');
-            /*
-            .attr("x", 0)
-            .attr("y", d => self.yscale(d.prefectureNameE))
-            .attr("width", d => self.xscale(d.testedPositive / 10))
-            .attr("height", self.yscale.bandwidth())
-            .attr("fill", d => d3.interpolate("orange", "red")(d.testedPositive / self.data[0][self.config.tgtValName]))
-            .append("text");
-            */
+            .append("path")
+            .attr('d', self.area(self.data))
+            .attr('stroke', 'red')
+            .attr('fill', 'orange');
+/*/
         self.xaxis_group
             .call(self.xaxis)
             .append("text")
@@ -103,18 +113,17 @@ class LineChart {
             .attr("y", 30)
             .attr("text-anchor", "middle")
             .attr("font-size", "10pt")
-            .text("Tested Positive");
+            .text("X-Axis");
 
         self.yaxis_group
             .call(self.yaxis)
             .append("text")
             .attr("fill", "black")
             .attr("x", -self.inner_height / 2)
-            .attr("y", -80)
+            .attr("y", -60)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
             .attr("font-size", "10pt")
-            .text("Prefectures");
-
+            .text("Y-Axis");
     }
 }
