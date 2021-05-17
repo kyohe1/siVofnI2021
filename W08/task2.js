@@ -1,4 +1,4 @@
-
+ 
 d3.csv("https://kyohe1.github.io/siVofnI2021/W08/data.csv")
     .then(data => {
         data.forEach( d => { d.x = +d.x; d.y = +d.y; });
@@ -7,7 +7,7 @@ d3.csv("https://kyohe1.github.io/siVofnI2021/W08/data.csv")
             parent: '#drawing_region',
             width: 1200,
             height: 800,
-            margin: { top: 30, right: 10, bottom: 40, left: 50 }
+            margin: { top: 30, right: 10, bottom: 40, left: 80 }
         };
 
         const lineChart = new LineChart(config, data);
@@ -19,13 +19,14 @@ d3.csv("https://kyohe1.github.io/siVofnI2021/W08/data.csv")
 
 
 class LineChart {
+
     constructor(config, data) {
         this.config = {
             parent: config.parent,
             width: config.width || 1200,
             height: config.height || 800,
             margin: config.margin || { top: 10, right: 10, bottom: 10, left: 50 },
-            axis_margin: 20
+            axis_margin: 10
         }
         this.data = data;
         this.init();
@@ -53,10 +54,10 @@ class LineChart {
         self.area = d3.area()
             .x( d => self.xscale(d.x))
             .y1( d => self.yscale(d.y))
-            .y0( self.yscale(d3.max(self.data, d => d.y)) + 10 );
-
+            .y0(self.inner_height  - 3*self.config.axis_margin);
+        console.log( self.inner_height  - d3.max( self.data, d => d.y ));
         self.xaxis = d3.axisBottom(self.xscale)
-            .ticks(12)
+            .ticks(6)
             .tickSize(5)
             .tickPadding(1);    
 
@@ -77,7 +78,7 @@ class LineChart {
 
         const xmin = d3.min( self.data, d => d.x );
         const xmax = d3.max( self.data, d => d.x );
-        self.xscale.domain( [xmin-self.config.axis_margin, xmax+self.config.axis_margin] );
+        self.xscale.domain( [xmin-self.config.axis_margin/2, xmax+self.config.axis_margin/2] );
 
         const ymin = d3.min( self.data, d => d.y );
         const ymax = d3.max( self.data, d => d.y );
@@ -89,14 +90,6 @@ class LineChart {
     render() {
         let self = this;
 
-        self.chart.selectAll("circle")
-            .data(self.data)
-            .enter()
-            .append("circle")
-            .attr("cx", d => self.xscale( d.x ) )
-            .attr("cy", d => self.yscale( d.y ) )
-            .attr("r", d => d.r );
-/*/
         self.chart.selectAll("path")
             .data(self.data)
             .enter()
@@ -104,15 +97,32 @@ class LineChart {
             .attr('d', self.area(self.data))
             .attr('stroke', 'red')
             .attr('fill', 'orange');
-/*/
+
+        self.chart.selectAll("circle") 
+           .data(self.data)
+            .enter()
+            .append("circle")
+            .attr("cx", d => self.xscale( d.x ) )
+            .attr("cy", d => self.yscale( d.y ) )
+            .attr("r", d => d.r )
+            .attr('fill', 'red');
+
+        self.chart.append("text")
+            .attr("fill", "black")
+            .attr("x", self.inner_width / 2)
+            .attr("y", 0)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "30pt")
+            .text("Area Plot");
+
         self.xaxis_group
             .call(self.xaxis)
             .append("text")
             .attr("fill", "black")
             .attr("x", self.inner_width / 2)
-            .attr("y", 30)
+            .attr("y", 40)
             .attr("text-anchor", "middle")
-            .attr("font-size", "10pt")
+            .attr("font-size", "20pt")
             .text("X-Axis");
 
         self.yaxis_group
@@ -120,10 +130,10 @@ class LineChart {
             .append("text")
             .attr("fill", "black")
             .attr("x", -self.inner_height / 2)
-            .attr("y", -60)
+            .attr("y", -50)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .attr("font-size", "10pt")
+            .attr("font-size", "20pt")
             .text("Y-Axis");
     }
 }
