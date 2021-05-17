@@ -113,7 +113,7 @@ class LineChart {
             .attr("y", 0)
             .attr("text-anchor", "middle")
             .attr("font-size", "30pt")
-            .text("Area Plot");
+            .text("Area Chart");
 
         self.xaxis_group
             .call(self.xaxis)
