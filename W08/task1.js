@@ -1,4 +1,3 @@
-
 d3.csv("https://kyohe1.github.io/siVofnI2021/W04/prefectures.csv")
     .then( data => {
         var extData = data.filter(d => d.year == "2021" && d.month == "4" && d.date == "18")
@@ -9,7 +8,7 @@ d3.csv("https://kyohe1.github.io/siVofnI2021/W04/prefectures.csv")
             width: 2000,
             height: 1500,
             margin: {top:30, right:10, bottom:40, left:100}
-        };    
+        };
 
         const barChart = new BarChart( config, extData );
         barChart.update();
@@ -58,7 +57,7 @@ class BarChart{
 
         self.xaxis_group = self.chart.append('g')
             .attr('transform', `translate(0, ${self.inner_height})`);
-        
+
         self.yaxis = d3.axisLeft( self.yscale )
             .tickSizeOuter(0);
 
